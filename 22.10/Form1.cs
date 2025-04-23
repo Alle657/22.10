@@ -14,7 +14,7 @@ namespace _22._10
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
 
 
 
@@ -22,18 +22,44 @@ namespace _22._10
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DateTime data1 = dateTimePicker1.Value;
-            DateTime data2 = dateTimePicker2.Value;
-            TimeSpan differenza = data1 - data2;
 
-            int secondiTotali = (int)differenza.TotalSeconds;
+            DateTime data1 = dateTimePicker1.Value.Date;
+            DateTime data2 = dateTimePicker2.Value.Date;
 
-            int ore = secondiTotali / 3600;
-            int minuti = (secondiTotali % 3600) / 60;
-            int secondi = secondiTotali % 60;
-            label1.Text = secondi.ToString();
-            label2.Text = minuti.ToString();
-            label3.Text = ore.ToString();
+            int giorniDifferenza = (data1 - data2).Days;
+            label1.Text = giorniDifferenza.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DateTime dataIniziale = dateTimePicker3.Value;
+            int giorni;
+
+            if (int.TryParse(textBox1.Text, out giorni))
+            {
+                DateTime nuovaData = dataIniziale.AddDays(giorni);
+                label5.Text = $"Nuova data: {nuovaData.ToShortDateString()}";
+            }
+            else
+            {
+                label5.Text = "Inserisci un numero valido!";
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DateTime dataIniziale = dateTimePicker3.Value;
+            int giorni;
+
+            if (int.TryParse(textBox1.Text, out giorni))
+            {
+                DateTime nuovaData = dataIniziale.AddDays(-giorni);
+                label5.Text = $"Nuova data: {nuovaData.ToShortDateString()}";
+            }
+            else
+            {
+                label5.Text = "Inserisci un numero valido!";
+            }
         }
     }
 }
